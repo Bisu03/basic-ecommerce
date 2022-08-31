@@ -96,7 +96,7 @@ function MyApp({ Component, pageProps }) {
   return <>
     <Navbar Cart={Cart} handleAddCart={handleAddCart} removeCart={removeCart} clearCart={clearCart} subTotal={subTotal} />
 
-    <Component handleAddCart={handleAddCart} removeCart={removeCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+    <Component Cart={Cart} handleAddCart={handleAddCart} removeCart={removeCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
 
     <Footer />
   </>

@@ -35,7 +35,7 @@ const Navbar = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
               tabIndex="0"
               className="menu menu-compact text-secondary dropdown-content mt-3 p-2 shadow bg-neutral rounded-box w-52"
             >
-               <li>
+              <li>
                 <Link href="/">
                   <a >
                     Home
@@ -148,7 +148,11 @@ const Navbar = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
 
             </div>
               <div className='relative flex justify-between w-full px-2 py-3 font-bold text-success ' >
-                <button className="btn btn-flex">Check Out</button>
+                <Link href="/checkout" >
+                  <a className="btn btn-flex" >
+                    Check Out
+                  </a>
+                </Link>
                 <button onClick={clearCart} className="btn btn-flex">Clear Cart</button>
               </div></>}
 

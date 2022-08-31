@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
 
 const Checkout = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
-
     console.log(Cart);
 
     return (
@@ -29,21 +28,21 @@ const Checkout = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
                             </div>
                             <div className="p-2 w-full">
                                 <div className="relative text-left">
-                                    <label htmlFor="message" className="leading-7 text-sm text-gray-600">Address</label>
-                                    <textarea id="message" name="message" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                    <label htmlFor="address" className="leading-7 text-sm text-gray-600">Address</label>
+                                    <textarea id="address" name="address" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                                 </div>
                             </div>
 
                             <div className="p-2 w-1/2">
                                 <div className="relative text-left">
-                                    <label htmlFor="name" className=" leading-7 text-sm text-gray-600">Phone Number</label>
-                                    <input type="text" id="name" name="name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <label htmlFor="tel" className=" leading-7 text-sm text-gray-600">Phone Number</label>
+                                    <input type="text" id="tel" name="tel" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                             </div>
                             <div className="p-2 w-1/2">
                                 <div className="relative text-left">
                                     <label htmlFor="email" className="leading-7 text-sm text-gray-600">Pincode</label>
-                                    <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <input type="tel" id="tel" name="tel" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                             </div>
 
@@ -55,8 +54,8 @@ const Checkout = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
                             </div>
                             <div className="p-2 w-1/2">
                                 <div className="relative text-left">
-                                    <label htmlFor="email" className="leading-7 text-sm text-gray-600">District</label>
-                                    <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <label htmlFor="text" className="leading-7 text-sm text-gray-600">District</label>
+                                    <input type="text" id="text" name="text" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                             </div>
                         </div>
@@ -68,20 +67,43 @@ const Checkout = ({ Cart, handleAddCart, removeCart, clearCart, subTotal }) => {
                 <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Review Cart</p>
             </div>
 
-            <div className="flex justify-center w-full flex-row  h-auto bg-primary">
-                {/* {Object.keys(Cart).length == 0 ? "Shoaping Cart is Empty" : "Shoaping Cart"}
-                {Object.keys(Cart).map((k) => <div key={k} className="flex m-2 place-items-center w-full justify-around">
-                    <p className=" text-base">.<p> {Cart[k].name} {Cart[k].varient} {Cart[k].size} </p>
-                        <p>₹ {Cart[k].price}</p></p>
-                    <div className="flex justify-center border-4 bg-primary w-32">
-                        <AiFillPlusCircle
-                            onClick={() => handleAddCart(Cart[k].id, Cart[k].qty, Cart[k].price, Cart[k].name, Cart[k].size, Cart[k].varient)} className=' cursor-pointer hover:text-neutral  text-error h-full w-6 mr-3 ' />
-                        <p>{Cart[k].qty}</p>
-                        <AiFillMinusCircle
-                            onClick={() => removeCart(Cart[k].id, Cart[k].qty, Cart[k].price, Cart[k].name, Cart[k].size, Cart[k].varient)} className='cursor-pointer  hover:text-neutral  text-error h-full w-6 ml-3 ' />
-                    </div>
+            {/* {Object.keys(Cart).length == 0 ? "Shoaping Cart is Empty" : "Shoaping Cart"} */}
+            <div className="overflow-x-auto px-5 ">
+                <table className="table w-full ">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    {Object.keys(Cart).map((k) =>
 
-                </div>)} */}
+                        <tbody key={k}>
+                            <tr>
+                                <td>{Cart[k].name} {Cart[k].varient} {Cart[k].size} </td>
+                                <td>₹{Cart[k].price}</td>
+                                <td className="flex justify-center w-32 bg-primary ">
+                                    <AiFillPlusCircle
+                                        onClick={() => handleAddCart(Cart[k].id, Cart[k].qty, Cart[k].price, Cart[k].name, Cart[k].size, Cart[k].varient)} className=' cursor-pointer hover:text-neutral  text-error h-full w-6 mr-3 ' />
+                                    <p>{Cart[k].qty}</p>
+                                    <AiFillMinusCircle
+                                        onClick={() => removeCart(Cart[k].id, Cart[k].qty, Cart[k].price, Cart[k].name, Cart[k].size, Cart[k].varient)} className='cursor-pointer  hover:text-neutral  text-error h-full w-6 ml-3 ' />
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    )}
+                </table>
+                <p className='text-center text-lg font-bold ' >
+                    {Object.keys(Cart).length <= 0 && "Shoaping Cart is Empty"}
+                </p>
+                <hr />
+                <p className='text-center text-lg font-bold ' >
+                    SubTotal = ₹{subTotal || 0}
+                </p>
+
+                <hr />
             </div>
 
             <div className='flex justify-center w-full my-2'>
